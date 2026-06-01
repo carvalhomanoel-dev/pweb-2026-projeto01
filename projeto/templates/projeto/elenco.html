@@ -1,0 +1,326 @@
+{% extends 'base.html' %}
+{% block title %}Elenco — FC Barcelona 2026{% endblock %}
+
+{% block extra_css %}
+<style>
+  .filter-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .filter-btn {
+    padding: 8px 20px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.on {
+    border-color: var(--barca-blue);
+    background: rgba(0,77,152,0.2);
+    color: #fff;
+  }
+
+  /* ── PLAYER GRID ── */
+  .players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+  }
+
+  .player-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px 20px;
+    text-align: center;
+    position: relative;
+    transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden;
+  }
+
+  .player-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+
+  .player-card.gk::before  { background: linear-gradient(90deg, #EDBB00, #ffdd55); }
+  .player-card.def::before { background: linear-gradient(90deg, #004D98, #0066cc); }
+  .player-card.mid::before { background: linear-gradient(90deg, #228B22, #32cd32); }
+  .player-card.fwd::before { background: linear-gradient(90deg, #A50044, #cc0055); }
+
+  .player-card:hover {
+    border-color: rgba(0,77,152,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+  }
+
+  .player-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin: 0 auto 14px;
+    font-weight: 700;
+    font-family: 'Bebas Neue', sans-serif;
+    letter-spacing: 0;
+    font-size: 1.4rem;
+  }
+
+  .gk  .player-avatar { background: rgba(237,187,0,0.15); border: 2px solid rgba(237,187,0,0.4); color: var(--barca-gold); }
+  .def .player-avatar { background: rgba(0,77,152,0.15);  border: 2px solid rgba(0,77,152,0.4);  color: #6ea8fe; }
+  .mid .player-avatar { background: rgba(34,139,34,0.15); border: 2px solid rgba(34,139,34,0.4); color: #6dbf6d; }
+  .fwd .player-avatar { background: rgba(165,0,68,0.15);  border: 2px solid rgba(165,0,68,0.4);  color: #ff7eb6; }
+
+  .player-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .player-name {
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 4px;
+    line-height: 1.2;
+  }
+
+  .player-nat {
+    font-size: 0.78rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .pos-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 40px 0 18px;
+  }
+
+  .pos-header h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+  }
+
+  .pos-line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">Elenco</h2>
+<div class="divider"></div>
+<p class="section-subtitle">FC Barcelona &mdash; Temporada 2025/2026 &bull; Técnico: Hansi Flick</p>
+
+<!-- GOLEIROS -->
+<div class="pos-header">
+  <h2 style="color: var(--barca-gold)">Goleiros</h2>
+  <div class="pos-line"></div>
+  <span class="badge badge-gold">GK</span>
+</div>
+
+<div class="players-grid">
+  <div class="player-card gk">
+    <div class="player-avatar">JG</div>
+    <div class="player-num">Nº 13</div>
+    <div class="player-name">Joan García</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-gold">Goleiro</span>
+  </div>
+  <div class="player-card gk">
+    <div class="player-avatar">TS</div>
+    <div class="player-num">Nº 1</div>
+    <div class="player-name">Marc-André ter Stegen</div>
+    <div class="player-nat">🇩🇪 Alemanha</div>
+    <span class="badge badge-gold">Goleiro</span>
+  </div>
+  <div class="player-card gk">
+    <div class="player-avatar">WS</div>
+    <div class="player-num">Nº 25</div>
+    <div class="player-name">Wojciech Szczęsny</div>
+    <div class="player-nat">🇵🇱 Polônia</div>
+    <span class="badge badge-gold">Goleiro</span>
+  </div>
+</div>
+
+<!-- DEFENSORES -->
+<div class="pos-header">
+  <h2 style="color: #6ea8fe">Defensores</h2>
+  <div class="pos-line"></div>
+  <span class="badge badge-blue">DEF</span>
+</div>
+
+<div class="players-grid">
+  <div class="player-card def">
+    <div class="player-avatar">PC</div>
+    <div class="player-num">Nº 3</div>
+    <div class="player-name">Pau Cubarsí</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-blue">Zagueiro</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">RA</div>
+    <div class="player-num">Nº 4</div>
+    <div class="player-name">Ronald Araújo</div>
+    <div class="player-nat">🇺🇾 Uruguai</div>
+    <span class="badge badge-blue">Zagueiro</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">EG</div>
+    <div class="player-num">Nº 24</div>
+    <div class="player-name">Eric García</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-blue">Zagueiro</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">CH</div>
+    <div class="player-num">Nº 15</div>
+    <div class="player-name">Christensen</div>
+    <div class="player-nat">🇩🇰 Dinamarca</div>
+    <span class="badge badge-blue">Zagueiro</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">AB</div>
+    <div class="player-num">Nº 3</div>
+    <div class="player-name">Alejandro Balde</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-blue">Lateral Esq.</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">GM</div>
+    <div class="player-num">Nº 20</div>
+    <div class="player-name">Gerard Martín</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-blue">Lateral Esq.</span>
+  </div>
+  <div class="player-card def">
+    <div class="player-avatar">JK</div>
+    <div class="player-num">Nº 23</div>
+    <div class="player-name">Jules Koundé</div>
+    <div class="player-nat">🇫🇷 França</div>
+    <span class="badge badge-blue">Lateral Dir.</span>
+  </div>
+</div>
+
+<!-- MEIO-CAMPO -->
+<div class="pos-header">
+  <h2 style="color: #6dbf6d">Meio-Campo</h2>
+  <div class="pos-line"></div>
+  <span class="badge" style="background:rgba(34,139,34,0.2);color:#6dbf6d;border:1px solid rgba(34,139,34,0.4)">MID</span>
+</div>
+
+<div class="players-grid">
+  <div class="player-card mid">
+    <div class="player-avatar">PG</div>
+    <div class="player-num">Nº 8</div>
+    <div class="player-name">Pedri González</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge" style="background:rgba(34,139,34,0.15);color:#6dbf6d;border:1px solid rgba(34,139,34,0.35)">Meia</span>
+  </div>
+  <div class="player-card mid">
+    <div class="player-avatar">GM</div>
+    <div class="player-num">Nº 21</div>
+    <div class="player-name">Gavi</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge" style="background:rgba(34,139,34,0.15);color:#6dbf6d;border:1px solid rgba(34,139,34,0.35)">Meia</span>
+  </div>
+  <div class="player-card mid">
+    <div class="player-avatar">FJ</div>
+    <div class="player-num">Nº 6</div>
+    <div class="player-name">Frenkie de Jong</div>
+    <div class="player-nat">🇳🇱 Holanda</div>
+    <span class="badge" style="background:rgba(34,139,34,0.15);color:#6dbf6d;border:1px solid rgba(34,139,34,0.35)">Volante</span>
+  </div>
+  <div class="player-card mid">
+    <div class="player-avatar">MC</div>
+    <div class="player-num">Nº 14</div>
+    <div class="player-name">Marc Casadó</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge" style="background:rgba(34,139,34,0.15);color:#6dbf6d;border:1px solid rgba(34,139,34,0.35)">Volante</span>
+  </div>
+  <div class="player-card mid">
+    <div class="player-avatar">DO</div>
+    <div class="player-num">Nº 5</div>
+    <div class="player-name">Dani Olmo</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge" style="background:rgba(34,139,34,0.15);color:#6dbf6d;border:1px solid rgba(34,139,34,0.35)">Meia</span>
+  </div>
+</div>
+
+<!-- ATACANTES -->
+<div class="pos-header">
+  <h2 style="color: #ff7eb6">Atacantes</h2>
+  <div class="pos-line"></div>
+  <span class="badge badge-red">FWD</span>
+</div>
+
+<div class="players-grid">
+  <div class="player-card fwd">
+    <div class="player-avatar" style="font-size:1.1rem;">RAF</div>
+    <div class="player-num">Nº 11</div>
+    <div class="player-name">Raphinha</div>
+    <div class="player-nat">🇧🇷 Brasil</div>
+    <span class="badge badge-red">Ponta Dir.</span>
+  </div>
+  <div class="player-card fwd">
+    <div class="player-avatar">LY</div>
+    <div class="player-num">Nº 9</div>
+    <div class="player-name">Robert Lewandowski</div>
+    <div class="player-nat">🇵🇱 Polônia</div>
+    <span class="badge badge-red">Centroavante</span>
+  </div>
+  <div class="player-card fwd">
+    <div class="player-avatar">LF</div>
+    <div class="player-num">Nº 19</div>
+    <div class="player-name">Lamine Yamal</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-red">Ponta Dir.</span>
+  </div>
+  <div class="player-card fwd">
+    <div class="player-avatar">FT</div>
+    <div class="player-num">Nº 27</div>
+    <div class="player-name">Ferran Torres</div>
+    <div class="player-nat">🇪🇸 Espanha</div>
+    <span class="badge badge-red">Ponta Esq.</span>
+  </div>
+  <div class="player-card fwd">
+    <div class="player-avatar">MR</div>
+    <div class="player-num">Nº 20</div>
+    <div class="player-name">Marcus Rashford</div>
+    <div class="player-nat">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Inglaterra</div>
+    <span class="badge badge-red">Atacante</span>
+  </div>
+  <div class="player-card fwd">
+    <div class="player-avatar">RB</div>
+    <div class="player-num">Nº 29</div>
+    <div class="player-name">Roony Bardghji</div>
+    <div class="player-nat">🇸🇪 Suécia</div>
+    <span class="badge badge-red">Ponta</span>
+  </div>
+</div>
+
+{% endblock %}

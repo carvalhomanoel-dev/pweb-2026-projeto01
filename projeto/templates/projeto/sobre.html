@@ -1,0 +1,383 @@
+{% extends 'base.html' %}
+{% block title %}Sobre — Messias{% endblock %}
+
+{% block extra_css %}
+<style>
+  .about-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  /* ── PROFILE CARD ── */
+  .profile-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 24px;
+    text-align: center;
+    position: sticky;
+    top: 90px;
+  }
+
+  .avatar-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--barca-blue), var(--barca-red));
+    padding: 3px;
+    margin: 0 auto 20px;
+  }
+
+  .avatar-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: var(--surface2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.8rem;
+    letter-spacing: 2px;
+    color: var(--text);
+  }
+
+  .profile-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2rem;
+    letter-spacing: 3px;
+    margin-bottom: 4px;
+  }
+
+  .profile-role {
+    color: var(--barca-gold);
+    font-size: 0.8rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+
+  .profile-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 20px 0;
+  }
+
+  .profile-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+  }
+
+  .meta-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 0.875rem;
+  }
+
+  .meta-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: rgba(0,77,152,0.15);
+    border: 1px solid rgba(0,77,152,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+  }
+
+  .meta-text strong {
+    display: block;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--muted);
+  }
+
+  /* ── CONTENT SIDE ── */
+  .content-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .info-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+  }
+
+  .info-block h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .info-block p {
+    color: var(--muted);
+    line-height: 1.8;
+    font-size: 0.95rem;
+    margin-top: 12px;
+  }
+
+  /* ── SKILLS ── */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .skill-pill {
+    padding: 6px 16px;
+    border-radius: 24px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    letter-spacing: 0.3px;
+  }
+
+  .skill-pill.py  { border-color: rgba(55,118,171,0.5); color: #79b8f0; }
+  .skill-pill.web { border-color: rgba(237,187,0,0.4);  color: var(--barca-gold); }
+  .skill-pill.db  { border-color: rgba(165,0,68,0.4);   color: #ff7eb6; }
+  .skill-pill.dj  { border-color: rgba(0,150,80,0.4);   color: #6dbf6d; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 16px;
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 16px;
+    padding-bottom: 24px;
+    position: relative;
+  }
+
+  .tl-item:last-child { padding-bottom: 0; }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--barca-blue);
+    margin-top: 4px;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+    border: 2px solid var(--bg);
+    box-shadow: 0 0 0 2px var(--barca-blue);
+  }
+
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 14px;
+    bottom: 0;
+    width: 2px;
+    background: var(--border);
+  }
+
+  .tl-item:last-child::before { display: none; }
+
+  .tl-content strong {
+    display: block;
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 2px;
+  }
+
+  .tl-content span {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  /* ── FAN BOX ── */
+  .fan-box {
+    background: linear-gradient(135deg, rgba(0,77,152,0.2), rgba(165,0,68,0.2));
+    border: 1px solid rgba(0,77,152,0.3);
+    border-radius: 14px;
+    padding: 28px;
+    text-align: center;
+  }
+
+  .fan-box h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+
+  .fan-box p {
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 720px) {
+    .about-layout {
+      grid-template-columns: 1fr;
+    }
+    .profile-card { position: static; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+
+<h2 class="section-title">Sobre Mim</h2>
+<div class="divider"></div>
+<p class="section-subtitle">Conheça o criador deste projeto</p>
+
+<div class="about-layout">
+
+  <!-- COLUNA ESQUERDA: PERFIL -->
+  <div>
+    <div class="profile-card">
+      <div class="avatar-ring">
+        <div class="avatar-inner">ME</div>
+      </div>
+      <div class="profile-name">Messias</div>
+      <div class="profile-role">Aluno de Informática</div>
+      <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+        <span class="badge badge-blue">Dev</span>
+        <span class="badge badge-red">Culé</span>
+        <span class="badge badge-gold">Python</span>
+      </div>
+      <div class="profile-divider"></div>
+      <div class="profile-meta">
+        <div class="meta-item">
+          <div class="meta-icon">📍</div>
+          <div class="meta-text">
+            <strong>Localização</strong>
+            Natal, Rio Grande do Norte
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-icon">🎓</div>
+          <div class="meta-text">
+            <strong>Curso</strong>
+            Informática / TI
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-icon">⚽</div>
+          <div class="meta-text">
+            <strong>Time do Coração</strong>
+            FC Barcelona
+          </div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-icon">💻</div>
+          <div class="meta-text">
+            <strong>Stack Favorita</strong>
+            Python + Django
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COLUNA DIREITA: CONTEÚDO -->
+  <div class="content-section">
+
+    <div class="info-block">
+      <h3>👋 Olá, mundo!</h3>
+      <p>
+        Meu nome é <strong>Messias</strong> e sou aluno do curso de Informática.
+        Sou apaixonado por tecnologia, programação e — é claro — pelo <strong>FC Barcelona</strong>!
+        Este projeto foi criado com Django como forma de praticar desenvolvimento web
+        enquanto falo sobre o meu time favorito.
+      </p>
+      <p>
+        Acredito que a melhor maneira de aprender programação é criando projetos reais
+        sobre assuntos que a gente ama. E o que eu mais amo além de tecnologia? Barça, claro.
+        Força Barça! 🔵🔴
+      </p>
+    </div>
+
+    <div class="info-block">
+      <h3>🛠️ Habilidades & Tecnologias</h3>
+      <p>Linguagens, frameworks e ferramentas que estou aprendendo e usando:</p>
+      <div class="skills-list">
+        <span class="skill-pill py">Python</span>
+        <span class="skill-pill dj">Django</span>
+        <span class="skill-pill web">HTML5</span>
+        <span class="skill-pill web">CSS3</span>
+        <span class="skill-pill web">JavaScript</span>
+        <span class="skill-pill db">SQL</span>
+        <span class="skill-pill db">SQLite</span>
+        <span class="skill-pill py">Git & GitHub</span>
+        <span class="skill-pill dj">Bootstrap</span>
+        <span class="skill-pill web">VS Code</span>
+      </div>
+    </div>
+
+    <div class="info-block">
+      <h3>📅 Minha Jornada</h3>
+      <p>Um pouco do meu caminho no mundo da tecnologia:</p>
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <strong>Descobri a programação</strong>
+            <span>Quando vi que dava pra fazer um computador fazer o que você manda, não teve volta.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <strong>Primeiros passos com Python</strong>
+            <span>A linguagem que me conquistou pela simplicidade e pelo poder.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <strong>Aprendendo Django</strong>
+            <span>Framework web em Python, robusto, elegante e poderoso. Perfeito para projetos como este!</span>
+          </div>
+        </div>
+        <div class="tl-item" style="padding-bottom:0">
+          <div class="tl-dot" style="background: var(--barca-gold); box-shadow: 0 0 0 2px var(--barca-gold);"></div>
+          <div class="tl-content">
+            <strong>Este projeto — 2026 🏆</strong>
+            <span>Unindo minha paixão pelo Barça com o aprendizado de desenvolvimento web com Django.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fan-box">
+      <h3>❤️ Orgulhosamente Culé</h3>
+      <p>
+        Ser culé vai além do futebol — é uma identidade, uma filosofia.
+        <em>"Més que un club"</em> (Mais que um clube) não é só um slogan:
+        é a razão pela qual o Barça é especial para mim e para milhões de fãs ao redor do mundo.
+        Visca el Barça! 🔵🔴
+      </p>
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% block title %}Início — FC Barcelona 2026{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-stripe"></div>
+  <p class="hero-eyebrow">⚽ Temporada 2025/2026</p>
+  <h1>Força <em>Barça</em></h1>
+  <p>Acompanhe o elenco, resultados e tudo sobre o Futbol Club Barcelona na temporada 2025/2026 — um ano histórico para o clube catalão.</p>
+  <div class="hero-actions">
+    <a href="{% url 'elenco' %}" class="btn btn-primary">Ver Elenco</a>
+    <a href="{% url 'sobre' %}" class="btn btn-outline">Sobre o Projeto</a>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item">
+    <div class="stat-num">16°</div>
+    <div class="stat-label">Supercopa 2026</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">3×</div>
+    <div class="stat-label">Títulos em 24/25</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">26</div>
+    <div class="stat-label">Jogadores</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">1899</div>
+    <div class="stat-label">Fundação</div>
+  </div>
+</div>
+
+<!-- DESTAQUES -->
+<div style="margin-bottom: 16px;">
+  <h2 class="section-title">Destaques</h2>
+  <div class="divider"></div>
+  <p class="section-subtitle">Os momentos mais marcantes do Barcelona em 2026</p>
+</div>
+
+<div class="grid-3">
+  <div class="news-card">
+    <div class="news-card-img bg-gold">🏆</div>
+    <div class="news-card-body">
+      <span class="badge badge-gold" style="margin-bottom:10px">Título</span>
+      <h3>Supercopa da Espanha 2026</h3>
+      <p>Barcelona venceu o Real Madrid por 3–2 em Jeddah e conquistou o 16° título da Supercopa da Espanha.</p>
+    </div>
+  </div>
+
+  <div class="news-card">
+    <div class="news-card-img bg-red">🌟</div>
+    <div class="news-card-body">
+      <span class="badge badge-red" style="margin-bottom:10px">Artilheiro</span>
+      <h3>Raphinha — Craque da Temporada</h3>
+      <p>O brasileiro foi o artilheiro da Supercopa com 4 gols e elegeu-se o Homem da Partida na final.</p>
+    </div>
+  </div>
+
+  <div class="news-card">
+    <div class="news-card-img bg-blue">🔵</div>
+    <div class="news-card-body">
+      <span class="badge badge-blue" style="margin-bottom:10px">Reforço</span>
+      <h3>Marcus Rashford no Barça</h3>
+      <p>O atacante inglês chegou por empréstimo do Manchester United e reforça o ataque de Hansi Flick.</p>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
